@@ -1,0 +1,3 @@
+ res←initialized req
+ ⍝ Notification from Client, no response
+ res←⍬

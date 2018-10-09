@@ -1,0 +1,9 @@
+ CheckContentLength←{
+     ∆←4⍴13 10
+     i←⊃∆(⍸⍷)⍵
+     i=0:0 ⍵
+     p←≠⊆⊢
+     hdrs←↑':'p¨⎕UCS¨10 p 13~⍨(i-1)↑⍵
+     cl←⍎⊃(hdrs,⊂'0')[hdrs[;1]⍳⊂'Content-Length';2]
+     cl,⊂(i+3)↓⍵
+ }

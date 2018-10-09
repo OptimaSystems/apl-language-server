@@ -1,0 +1,38 @@
+ clt HandleRequest data;method;res_data;rs
+
+ :Trap 0
+     req←FromJSON data
+ :Else
+     res←Error ENUMS.PARSE_ERROR
+     json←toJSON res
+     #.DRC.Send cn(1 json)
+     :Return
+ :EndTrap
+ ⎕←req.method
+
+ r←⍬
+ method←{6::'' ⋄ '.'@{⍵='/'}⍵.method}req
+ :If 2 2≢req.⎕NC↑'jsonrpc' 'method'
+     res←req Error ENUMS.INVALID_REQUEST
+ :ElseIf req.jsonrpc≢'2.0'
+     res←req Error ENUMS.INVALID_REQUEST
+ :ElseIf 3≠Handlers.⎕NC method
+     res←req Error ENUMS.METHOD_NOT_FOUND
+ :Else
+     res←⎕NS''
+     res.jsonrpc←'2.0'
+     :Trap 0
+         r←(Handlers⍎method)req
+         :If 2=req.⎕NC'id'
+             res.id←req.id
+             res.result←r
+         :EndIf
+     :Else
+         res←req Error ENUMS.INTERNAL_ERROR
+     :EndTrap
+ :EndIf
+ :If ~0∊⍴r
+     res_data←Wrap res
+     r←DRC.Send clt res_data
+ :EndIf
+ ⍝

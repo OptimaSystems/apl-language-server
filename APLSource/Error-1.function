@@ -1,0 +1,7 @@
+ res←{rq}Error error
+ res←⎕NS''
+ res.jsonrpc←'2.0'
+ res.id←{2=⎕NC ⍵:⍎⍵ ⋄ ⎕NULL}'rq.id'
+ res.error←⎕NS''
+ res.error.(code message)←2↑error
+ ⍝

@@ -1,0 +1,12 @@
+dependencies:
+  conga: 3.1.2
+packages:
+  /conga/3.1.2:
+    dev: false
+    resolution:
+      integrity: sha512-PZLsWt40ayKMrLQBcemxwIR7A+Ls+O1n9fbLO2qv+17whY3pa+Jh2S8Ydlj8QVog7Dwpr6QCTX3fUyOd53U0DA==
+registry: 'https://apm.theaplroom.com/'
+shrinkwrapMinorVersion: 8
+shrinkwrapVersion: 3
+specifiers:
+  conga: ^3.1.1

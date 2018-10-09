@@ -1,0 +1,7 @@
+ Wrap←{
+ ⍝ Serialise and wrap in envelope
+     json←'UTF-8'⎕UCS ⎕JSON ⍵
+     cl←≢json
+     d←⎕UCS'Content-Length: ',⍕cl
+     d,(4⍴13 10),json
+ }

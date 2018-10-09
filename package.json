@@ -1,0 +1,7 @@
+{
+    "name":"apl-language-server",
+    "version":"1.0.0",
+    "dependencies": {
+        "conga":"^3.1.1"
+        }
+}

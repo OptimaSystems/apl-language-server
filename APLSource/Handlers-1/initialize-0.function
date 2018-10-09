@@ -1,0 +1,10 @@
+ res←initialize req;cap;json;resp;tso
+
+
+ res←⎕NS''
+ cap←res.(capabilities←⎕NS'')
+ tso←cap.(textDocumentSync←⎕NS'')
+ tso.openClose←⊂'true'
+ tso.change←1  ⍝ 0=none; 1=full; 2=incremental
+ cap.(workspace←⎕NS'').(workspaceFolders←⎕NS'').(supported←⊂'true')
+ ⍝

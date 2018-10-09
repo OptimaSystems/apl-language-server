@@ -1,0 +1,1 @@
+ FromJSON←{⎕JSON'UTF-8'⎕UCS ⍵}
