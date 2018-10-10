@@ -17,6 +17,7 @@
  :ElseIf req.jsonrpc≢'2.0'
      res←req Error ENUMS.INVALID_REQUEST
  :ElseIf 3≠Handlers.⎕NC method
+     ∘∘∘
      res←req Error ENUMS.METHOD_NOT_FOUND
  :Else
      res←⎕NS''
