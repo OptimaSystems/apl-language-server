@@ -2,6 +2,6 @@
     CaseCode←'On'
     KeepHistory←'On'
     Open←''
-    ProjectSpace←'#.LSP'
+    ProjectSpace←'#.LS'
     StartUp←''
 :EndNamespace 

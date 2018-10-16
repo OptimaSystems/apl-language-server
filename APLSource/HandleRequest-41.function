@@ -1,14 +1,14 @@
- clt HandleRequest data;method;res_data;rs
+ clt HandleRequest data;method;r;req;res;res_data;rs
 
  :Trap 0
      req←FromJSON data
  :Else
      res←Error ENUMS.PARSE_ERROR
-     json←toJSON res
-     #.DRC.Send cn(1 json)
+     res_data←Wrap res
+     DRC.Send clt res_data
      :Return
  :EndTrap
- ⎕←req.method
+⍝ ⎕←req.method
 
  r←⍬
  method←{6::'' ⋄ '.'@{⍵='/'}⍵.method}req
@@ -16,13 +16,19 @@
      res←req Error ENUMS.INVALID_REQUEST
  :ElseIf req.jsonrpc≢'2.0'
      res←req Error ENUMS.INVALID_REQUEST
+ :ElseIf method≡'shutdown'
+     done←1
+ :ElseIf method≡'$.cancelRequest'
+    ⍝ cancel request?
+ :ElseIf method≡'$.setTraceNotification'
+    ⍝ huh?
  :ElseIf 3≠Handlers.⎕NC method
      ∘∘∘
      res←req Error ENUMS.METHOD_NOT_FOUND
  :Else
      res←⎕NS''
      res.jsonrpc←'2.0'
-     :Trap 0
+     :Trap 0/0
          r←(Handlers⍎method)req
          :If 2=req.⎕NC'id'
              res.id←req.id

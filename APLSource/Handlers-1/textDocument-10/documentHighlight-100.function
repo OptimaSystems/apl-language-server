@@ -1,0 +1,3 @@
+ r←documentHighlight req
+ r←⍬
+ ⍝

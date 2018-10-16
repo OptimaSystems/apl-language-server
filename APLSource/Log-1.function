@@ -1,0 +1,10 @@
+ Log data;json;t;ts
+
+ ts←,'G<9999-99-99 99:99:99.999>'⎕FMT(6 1/100 1000)⊥⎕TS
+ json←⎕UCS data
+ t←{
+     22::⍵ ⎕NCREATE 0
+     ⍵ ⎕NTIE 0
+ }AcreConfig.ProjectFolder,'log.txt'
+ (ts,' ',json,⎕UCS 10)⎕NAPPEND t
+ ⎕NUNTIE t

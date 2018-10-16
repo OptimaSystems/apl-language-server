@@ -1,0 +1,14 @@
+PercentDecode←{⎕ML←3
+     dec←{⎕ML ⎕IO←0
+         ⍉16⊥16|'0123456789ABCDEF0123456789abcdef'⍳⍉↑⍵
+     }
+     v←'%20',⍵
+     p←(v≠'%')⊂v
+     p2←dec 2↑¨p
+     p3←2↓¨p
+     b←1↓∊0,¨'+'=p3     ⍝ For backwards compatability we attempt to decode + as ' '
+     r←'UTF-8'⎕UCS 1↓⊃,/p2,¨⎕UCS¨p3
+     0=+/b:r            ⍝ No blanks: done
+     (b/r)←' '
+     r
+ }

@@ -1,8 +1,9 @@
- Run dummy;cl;clt;data;done;drc;dt;ev;host;hp;msg;nm;port;rc
+ Run dummy;cl;clt;data;done;drc;dt;ev;host;hp;msg;nm;port;rc;stream
 ⍝ Connect to LanguageClient on host:port address in LSP_TCP env var
+ Init
+
  hp←2 ⎕NQ'.' 'GetEnvironment' 'LSP_TCP'
  host port←':'(≠⊆⊢)hp
- DRC←Conga.Init'APL_LS'
 
  rc clt←2↑DRC.Clt''host(⍎port)'Raw'
  done←0
@@ -24,6 +25,7 @@
      :If (cl>0)∧cl≤≢stream
          data←cl↑stream
          stream↓⍨←cl
+         Log data
          clt HandleRequest&data
          cl←0
      :EndIf
@@ -31,4 +33,5 @@
  :EndWhile
 
  DRC.Close clt
+ ⎕OFF
  ⍝
