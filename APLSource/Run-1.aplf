@@ -22,7 +22,7 @@
      :ElseIf rc=100
          :Continue
      :Else
-         ∘∘∘
+        ⍝ ∘∘∘
      :EndIf
      :If cl=0
          cl stream←CheckContentLength stream
@@ -30,7 +30,7 @@
      :If (cl>0)∧cl≤≢stream
          data←cl↑stream
          stream↓⍨←cl
-         Log data
+        ⍝ Log data
          clt HandleRequest&data
          cl←0
      :EndIf

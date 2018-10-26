@@ -23,7 +23,6 @@
  :ElseIf method≡'$.setTraceNotification'
     ⍝ huh?
  :ElseIf 3≠Handlers.⎕NC method
-     ∘∘∘
      res←req Error ENUMS.METHOD_NOT_FOUND
  :Else
      res←⎕NS''
