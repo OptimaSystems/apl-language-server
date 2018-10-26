@@ -1,6 +1,6 @@
 SplitLines←{
      CR LF←⎕UCS 13 10
-     p←≠⊆⊢
+     p←1↓¨(⊣=,)⊂,
      ∨/CR LF⍷⍵:LF p ⍵~CR
      LF∊⍵:LF p ⍵
      CR p ⍵
