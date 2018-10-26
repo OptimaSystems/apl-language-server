@@ -1,0 +1,67 @@
+ r←completion req;LS;pos;text;lines;line;ind;chars;map;pk;uri;version;te;bqs;pks;pku
+ r←⎕NS''
+ r.isIncomplete←⊂'false'
+ r.items←⍬
+ LS←##.##
+ pos←req.params.position
+ text←LS.GetText req.params.textDocument.uri
+ lines←LS.SplitLines text
+ line←(pos.line+1)⊃lines
+ ind←¯1+(+\1+65535<⎕UCS line)⍳1+pos.character
+ chars←¯2↑ind↑line
+ pk←⊃pks←⊃¨LS.settings.prefixCompleteCharacters
+
+ :If ∧/(¯3↑ind↑line)∊pks
+⍝ found bq item
+     uri version←LS.textDocuments[LS.textDocuments.uri⍳⊂req.params.textDocument.uri].(uri version)
+     te←⎕NS''
+     te.range←te LS.Range pos.(line(character-3)line character)
+     te.newText←,LS.BQ_MAP[LS.BQ_MAP[;2]⍳chars[2];1]
+     LS.ApplyEdit uri version te
+
+ :ElseIf ∧/chars∊pks
+⍝ bqbq complete
+     pku←⊃chars
+     bqs←((pku,¨⊢/LS.BQ_MAP),⊂'  ')[LS.BQ_MAP[;1]⍳⊃¨LS.BQBQ_MAP]
+     r.items←bqs{
+         i←r.⎕NS''
+         i.label←(⊃⍵),' ',⍺,' ',chars,1↓⍵
+         i.sortText←1↓⍺
+         i.kind←14 ⍝ Keyword
+         te←i.(textEdit←⎕NS'')
+         te.range←te LS.Range pos.(line(character-2)line character)
+         te.newText←,⊃⍵
+         i
+     }¨LS.BQBQ_MAP
+     r.isIncomplete←⊂'false'
+
+ :ElseIf chars[2]∊pks
+⍝ bq complete
+     map←LS.BQ_MAP⌿⍨' '≠⊣/LS.BQ_MAP
+     pku←2⊃chars
+     r.items←{
+         i←r.⎕NS''
+         title←{6::'' ⋄ ' ',⊃LS.LB_HELP.tips.⍎0(7162⌶)⍵}⍺
+         i.label←⍺,' ',pku,⍵,title
+         i.sortText←,⍺
+         i.kind←14 ⍝ Keyword
+         te←i.(textEdit←⎕NS'')
+         te.range←te LS.Range pos.(line(character-1)line character)
+         te.newText←⍺
+         i
+     }/map
+     r.isIncomplete←⊂'true'
+
+ :ElseIf chars[1]∊pks
+ :AndIf chars[2]∊LS.BQ_MAP[;2]
+⍝ found bq item
+     uri version←LS.textDocuments[LS.textDocuments.uri⍳⊂req.params.textDocument.uri].(uri version)
+     te←⎕NS''
+     te.range←te LS.Range pos.(line(character-2)line character)
+     te.newText←,LS.BQ_MAP[LS.BQ_MAP[;2]⍳chars[2];1]
+     LS.ApplyEdit uri version te
+
+ :Else
+     ⍝ ay caramba!!
+ :EndIf
+ ⍝

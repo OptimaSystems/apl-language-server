@@ -1,0 +1,28 @@
+ r←hover req;LS;NL;c;desc;doc;ind;line;lines;p;pos;title
+ LS←##.##
+ r←⊂'null'
+ pos←req.params.position
+ doc←(LS.textDocuments.uri⍳⊂req.params.textDocument.uri)⊃LS.textDocuments
+ lines←LS.SplitLines doc.text
+ line←(pos.line+1)⊃lines
+ ind←(+\1+65535<⎕UCS line)⍳1+pos.character
+⍝    ⎕←ind⊃line
+ :Trap 3 6
+     title desc←LS.LB_HELP.tips.⍎0(7162⌶)ind⊃line
+ :Else
+     :Return
+ :EndTrap
+ NL←⎕UCS 10
+ r←⎕NS''
+ c←r.(contents←⎕NS'')
+ c.kind←'markdown'
+ c.value←'## ',title,NL
+ c.value,←'```apl',NL
+ c.value,←desc,NL
+ c.value,←'```',NL
+ p←r.(range←⎕NS'')
+ p.(start←⎕NS'').(line character)←pos.(line character)
+ p.(end←⎕NS'').(line character)←pos.(line character)+0,1+65535<⎕UCS ind⊃line
+
+⍝ ⎕←⎕JSON req
+ ⍝

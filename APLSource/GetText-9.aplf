@@ -1,0 +1,7 @@
+ r←GetText uri;ind
+ r←''
+ :If 0<≢textDocuments
+     ind←textDocuments.uri⍳⊂uri
+ :AndIf ind≤≢textDocuments
+     r←(ind⊃textDocuments).text
+ :EndIf

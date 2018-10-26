@@ -1,3 +1,4 @@
 .acre/
+build
 node_modules/
 log.txt

@@ -1,0 +1,6 @@
+ r←didChangeConfiguration req;LS
+ r←⍬
+ LS←##.##
+ LS.settings←LS.⎕NS req.params.settings.apl.server
+ LS.ReRegisterCompletion
+ ⍝

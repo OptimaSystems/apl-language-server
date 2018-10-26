@@ -1,0 +1,4 @@
+r←parent Range arg
+r←parent.(range←⎕NS'')
+r.(start end←⎕NS¨'' '')
+r.(start end).(line character)←↓2 2⍴arg

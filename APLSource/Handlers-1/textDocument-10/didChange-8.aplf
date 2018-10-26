@@ -1,0 +1,17 @@
+ r←didChange req;LS;doc;ind
+ r←⍬
+ LS←##.##
+ :If 0<≢LS.textDocuments
+     ind←LS.textDocuments.uri⍳⊂req.params.textDocument.uri
+ :AndIf ind≤≢LS.textDocuments
+     doc←LS.textDocuments[ind]
+     doc.text←⊃req.params.contentChanges.text
+     doc.version←req.params.textDocument.version
+
+ :Else
+     doc←LS.⎕NS req.params.textDocument
+     doc.text←req.params.contentChanges.text
+     LS.textDocuments,←doc
+ :EndIf
+
+ ⍝

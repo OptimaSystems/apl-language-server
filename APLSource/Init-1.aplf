@@ -1,4 +1,7 @@
  Init
 
  LB_HELP←⎕JSON⊃⎕NGET AcreConfig.ProjectFolder,'lbhelp.json'
+ workspaces←⍬
+ textDocuments←⍬
+ COMP_ID←⍬
  DRC←Conga.Init'APL_LS'

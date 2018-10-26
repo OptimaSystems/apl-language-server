@@ -1,0 +1,15 @@
+ApplyEdit(uri version edit);r;p;e;req_data
+
+r←⎕NS''
+r.id←1
+r.jsonrpc←'2.0'
+r.method←'workspace/applyEdit'
+p←r.(params←⎕NS'')
+p.label←'prefix completion'
+e←⊃p.(edit←⎕NS'').(documentChanges←,⎕NS'')
+e.(textDocument←⎕NS'').(uri version)←uri version
+e.edits←,e.⎕NS edit
+
+req_data←Wrap r
+r←DRC.Send clt req_data
+⍝

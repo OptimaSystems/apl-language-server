@@ -1,7 +1,17 @@
 {
     "name":"apl-language-server",
-    "version":"1.0.0",
+    "version":"0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/OptimaSystems/apl-language-server.git"
+    },
+    "files": [
+        "acreconfig.txt",
+        "APLSource",
+        "lbhelp.json"
+    ],
+    "main": "#.LS.Run&0",
     "dependencies": {
-        "conga":"^3.1.1"
-        }
+        "conga":"^3.1.2"
+    }
 }

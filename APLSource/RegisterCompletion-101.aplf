@@ -1,0 +1,20 @@
+RegisterCompletion;r;p;e;o;d;req_data
+
+COMP_ID←'completion_',,14 0⍕100⊥6↑⎕TS
+
+r←⎕NS''
+r.id←1
+r.jsonrpc←'2.0'
+r.method←'client/registerCapability'
+p←r.(params←⎕NS'')
+e←⊃p.(registrations←,⎕NS'')
+e.id←COMP_ID
+e.method←'textDocument/completion'
+o←e.(registerOptions←⎕NS'')
+d←⊃o.(documentSelector←,⎕NS'')
+d.language←'apl'
+o.resolveProvider←⊂'false'
+o.triggerCharacters←,¨settings.prefixCompleteCharacters
+req_data←Wrap r
+r←DRC.Send clt req_data
+⍝

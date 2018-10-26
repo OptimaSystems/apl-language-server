@@ -1,0 +1,15 @@
+UnRegisterCompletion;r;p;e;o;req_data
+→(0∊⍴COMP_ID)⍴0
+
+r←⎕NS''
+r.id←2
+r.jsonrpc←'2.0'
+r.method←'client/unregisterCapability'
+p←r.(params←⎕NS'')
+e←⊃p.(unregistrations←,⎕NS'')
+e.id←COMP_ID
+e.method←'textDocument/completion'
+req_data←Wrap r
+r←DRC.Send clt req_data
+COMP_ID←⍬
+⍝

@@ -1,0 +1,47 @@
+ Build;tmp;cd;setFolderProperty;getFiles;files;file;modules;tmp_mods;build;⎕IO;⎕ML;project;projects
+ ⎕IO←⎕ML←1
+ tmp←⊃1 ⎕NPARTS(739⌶0),'/'
+ cd←⊃1 ⎕NPARTS'./'
+ projects←⎕SE.UCMD'acre.projects'
+ project←⍎⊃projects[projects[;2]⍳⊂cd;1]
+ setFolderProperty←{
+     d←⍺⍎⍵
+     rp←((≢cd)×cd(⊃⍷)d)↓d
+     _←⍺.⎕EX ⍵
+     rc←⍺.⎕FX('r←',⍵)('r←(⊃1 ⎕NPARTS ⎕WSID),''',rp,'''')
+     rc≢⍵:∘∘
+     0
+ }
+ getFiles←{
+     6::,⊂'*'
+     f←⍵.⍎'__apm.files'
+     f/⍨~(⊂'APLSource')(⊃⍷)¨f
+ }
+ {
+     _←⍵.AcreConfig setFolderProperty'ProjectFolder'
+     _←⍵.__apm setFolderProperty'folder'
+ }¨project,#.__packages.(⍎¨⎕NL-9)
+
+ tmp,←(14 0⍕100⊥6↑⎕TS),'/'
+ 3 ⎕MKDIR tmp
+
+ files←getFiles project
+ :For file :In files
+     tmp ⎕NCOPY⍠'Wildcard' 1⊢cd,file
+ :EndFor
+ 3 ⎕NDELETE(⊂tmp),¨'APLSource' 'acreconfig.txt'
+
+ tmp_mods←tmp,'node_modules/'
+ 3 ⎕MKDIR tmp_mods
+ modules←⊃{(⍺=1)/⍵}/1 0 ⎕NINFO⍠('Wildcard' 1)('Follow' 0)⊢cd,'node_modules\*'
+ tmp_mods ⎕NCOPY modules
+ {
+     3 ⎕NDELETE⊃⎕NINFO⍠('Wildcard' 1)('Recurse' 1)⊢⍵
+ }¨(⊂tmp_mods),¨'APLSource' '.acre'
+
+ build←cd,'build'
+ 3 ⎕NDELETE build
+ ⎕LX←project.__apm.main
+ 0 #.⎕SAVE tmp,project.__apm.name
+ build ⎕NMOVE tmp
+      ⍝
