@@ -1,6 +1,6 @@
 {
     "name":"apl-language-server",
-    "version":"0.0.1",
+    "version":"0.0.2",
     "repository": {
         "type": "git",
         "url": "https://github.com/OptimaSystems/apl-language-server.git"
@@ -12,6 +12,6 @@
     ],
     "main": "#.LS.Run&0",
     "dependencies": {
-        "conga":"^3.1.2"
+        "conga":"^3.1.3"
     }
 }
