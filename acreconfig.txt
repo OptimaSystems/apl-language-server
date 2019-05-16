@@ -1,6 +1,6 @@
 :Namespace 
-    CaseCode←'On'
-    KeepHistory←'On'
+    CaseCode←'Off'
+    KeepHistory←'Off'
     Open←''
     ProjectSpace←'#.LS'
     StartUp←''
