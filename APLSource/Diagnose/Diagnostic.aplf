@@ -1,0 +1,10 @@
+ d←Diagnostic(range severity code message);d;r
+ d←⎕NS''
+ r←d ##.Range range
+ d.severity←severity
+ d.(code message)←code message
+ d.source←'Dyalog'
+⍝ d.relatedInformation←[{
+⍝   location: { uri, range },
+⍝   message: string
+⍝ }...]

@@ -1,0 +1,11 @@
+ {r}←PublishDiagnostics(uri diagnostics);params;p;req_data;n
+
+ n←⎕NS''
+ n.jsonrpc←'2.0'
+ n.method←'textDocument/publishDiagnostics'
+ p←n.(params←⎕NS'')
+ p.uri←uri
+ p.diagnostics←,diagnostics
+ req_data←Wrap n
+ r←DRC.Send'CLT00000000'req_data
+⍝

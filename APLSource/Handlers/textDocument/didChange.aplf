@@ -1,10 +1,10 @@
- r←didChange req;LS;doc;ind
+ r←didChange req;LS;doc;mask
  r←⍬
  LS←##.##
  :If 0<≢LS.textDocuments
-     ind←LS.textDocuments.uri⍳⊂req.params.textDocument.uri
- :AndIf ind≤≢LS.textDocuments
-     doc←LS.textDocuments[ind]
+     mask←LS.textDocuments.uri∊⊂req.params.textDocument.uri
+ :AndIf ∨/mask
+     doc←⊃mask/LS.textDocuments
      doc.text←⊃req.params.contentChanges.text
      doc.version←req.params.textDocument.version
 
@@ -13,5 +13,5 @@
      doc.text←req.params.contentChanges.text
      LS.textDocuments,←doc
  :EndIf
-
+ LS.Diagnose.Run doc
  ⍝

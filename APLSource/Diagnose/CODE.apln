@@ -1,0 +1,7 @@
+:Namespace CODE
+    ⍝ Diagnostic code
+    LONG_LINE   ← 1 
+    IBEAM       ← 2 
+
+:EndNamespace
+

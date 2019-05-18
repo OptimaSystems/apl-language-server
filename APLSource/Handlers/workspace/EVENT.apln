@@ -1,0 +1,5 @@
+:Namespace EVENT
+    FILE_CREATED ← 1
+    FILE_CHANGED ← 2
+    FILE_DELETED ← 3
+:EndNamespace

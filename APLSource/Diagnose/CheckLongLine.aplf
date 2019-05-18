@@ -1,0 +1,12 @@
+ d←CheckLongLine lines;inds;c;coords;msg;on
+
+ on←~∨\∨/'⍝ aplint-disable no-long-lines'⍷↑lines
+ inds←⍸100<c←on×≢¨lines
+ coords←(inds-1),¨⍪¨0,¨(⊂inds)⌷c
+ msg←'This line is a bit long don''t you think?'
+ msg,←(⎕UCS 10),'Consider refactoring into multiple lines to make it easier to read.'
+ d←SEVERITY.INFORMATION CODE.LONG_LINE msg∘{
+     Diagnostic(⊂⍵),⍺
+ }¨coords
+
+ ⍝

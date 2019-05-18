@@ -1,5 +1,7 @@
 :Namespace ENUMS
-    ⍝                     code      message                  meaning
+    ⍝ aplint-disable no-long-lines
+
+    ⍝                           code      message                  meaning
     ##.PARSE_ERROR            ←¯32700 'Parse error'            'Invalid JSON was received by the server. An error occurred on the server while parsing the JSON text.'
     ##.INVALID_REQUEST        ←¯32600 'Invalid Request'        'The JSON sent is not a valid Request object.'
     ##.METHOD_NOT_FOUND       ←¯32601 'Method not found'       'The method does not exist / is not available.'
@@ -13,9 +15,4 @@
     ⍝ Defined by the protocol.
     ##.REQUEST_CANCELLED      ←¯32800 'Request cancelled'      'Request cancelled'
 
-    ⍝ Diagnostic severity
-    ##.DIAGNOSTIC_ERROR       ←1
-    ##.DIAGNOSTIC_WARNING     ←2
-    ##.DIAGNOSTIC_INFORMATION ←3
-    ##.DIAGNOSTIC_HINT        ←4
 :EndNamespace

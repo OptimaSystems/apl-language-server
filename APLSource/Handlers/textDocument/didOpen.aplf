@@ -1,11 +1,13 @@
- r←didOpen req;LS;ind
+ r←didOpen req;LS;ind;doc
  r←⍬
  LS←##.##
+ doc←LS.⎕NS req.params.textDocument
  :If 0<≢LS.textDocuments
-     ind←LS.textDocuments.uri⍳⊂req.params.textDocument.uri
+     ind←LS.textDocuments.uri⍳⊂doc.uri
  :AndIf ind≤≢LS.textDocuments
-     LS.textDocuments[ind]←LS.⎕NS req.params.textDocument
+     LS.textDocuments[ind]←doc
  :Else
-     LS.textDocuments,←LS.⎕NS req.params.textDocument
+     LS.textDocuments,←doc
  :EndIf
+ LS.Diagnose.Run&doc
  ⍝

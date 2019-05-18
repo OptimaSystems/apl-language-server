@@ -1,0 +1,19 @@
+ d←CheckIbeam lines;coords;msg;ibeams;on;LF
+ LF←⎕UCS 10
+ msg←'Although documentation is provided for I-Beam functions,'
+ msg,←' any service provided using I-Beam should be considered as "experimental"'
+ msg,←' and subject to change – without notice - from one release to the next.'
+ msg,←LF,'Any use of I-Beams in applications should therefore be carefully isolated'
+ msg,←' in cover-functions that can be adjusted if necessary.'
+ msg,←LF,'To ignore this warning add the following comment to the end of the line:'
+ msg,←LF,'⍝ aplint-disable-line no-i-beam'
+
+ ibeams←'⌶'∊⍨↑lines
+ on←~∨/'⍝ aplint-disable-line no-i-beam'⍷↑lines
+ coords←¯1+⍸on×[1]ibeams
+
+ d←SEVERITY.WARNING CODE.IBEAM msg∘{
+     Diagnostic(⊂⍵),⍺
+ }¨coords
+
+ ⍝

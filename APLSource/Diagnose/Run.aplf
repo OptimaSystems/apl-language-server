@@ -1,0 +1,10 @@
+ {r}←Run doc;lines;d
+
+ lines←##.SplitLines doc.text
+
+ d←⍬
+ d,←CheckLongLine lines
+ d,←CheckIbeam lines
+
+ r←##.PublishDiagnostics doc.uri d
+⍝

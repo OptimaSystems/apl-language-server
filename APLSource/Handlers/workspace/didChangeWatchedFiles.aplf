@@ -1,3 +1,16 @@
- r←didChangeWatchedFiles req
+ r←didChangeWatchedFiles req;LS;mask;change
  r←⍬
+ LS←##.##
+ :For change :In req.params.changes
+     :Select change.type
+     :Case EVENT.FILE_DELETED
+         :If 0<≢LS.textDocuments
+             mask←LS.textDocuments.uri∊⊂change.uri
+         :AndIf ∨/mask
+             LS.PublishDiagnostics change.uri ⍬
+             LS.textDocuments←(~mask)/LS.textDocuments
+         :EndIf
+
+     :EndSelect
+ :EndFor
  ⍝

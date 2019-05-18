@@ -1,0 +1,7 @@
+:Namespace SEVERITY
+    ⍝ Diagnostic severity
+    ERROR       ← 1
+    WARNING     ← 2
+    INFORMATION ← 3
+    HINT        ← 4
+:EndNamespace

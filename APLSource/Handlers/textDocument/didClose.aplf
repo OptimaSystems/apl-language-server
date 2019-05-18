@@ -1,3 +1,9 @@
- r←didClose req
+ r←didClose req;LS;mask
+ LS←##.##
+ :If 0<≢LS.textDocuments
+     mask←LS.textDocuments.uri∊⊂req.params.textDocument.uri
+ :AndIf ∨/mask
+     LS.textDocuments←(~mask)/LS.textDocuments
+ :EndIf
  r←⍬
  ⍝
